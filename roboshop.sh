@@ -16,7 +16,7 @@ do
   --query "Instances[0].InstanceId" \
   --output text)
   
-   if [ $i != "frontend"]
+   if [ $i != "frontend" ]
    then
         Ip=$(aws ec2 describe-instances \
         --instance-ids $Instance_id \
