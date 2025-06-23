@@ -20,8 +20,8 @@ do
    then
         Ip=$(aws ec2 describe-instances \
         --instance-ids $Instance_id \
-        --query 'Instances[0].PrivateIpAddress' \
-        --output text ) 
+        --query 'Reservations[0].Instances[0].PrivateIpAddress' \
+        --output text) 
     else
         Ip=$(aws ec2 describe-instances \
         --instance-ids $Instance_id \
