@@ -23,7 +23,7 @@ Validate (){
         echo  "$2 ....Success"
 
     else
-        echo "$2 $R....Failure"
+        echo -e "$2 $R....Failure"
         exit 1
     fi
 }
