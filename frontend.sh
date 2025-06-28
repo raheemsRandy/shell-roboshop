@@ -27,7 +27,7 @@ Validate (){
 
 #nginx installation
 
-dnf module disable nginx -y
+dnf module disable 2nginx -y
 Validate $? Disabling module
 # if [ $? eq 0 ]
 # then
