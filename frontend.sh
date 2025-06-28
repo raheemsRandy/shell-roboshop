@@ -30,7 +30,8 @@ Validate (){
 
 dnf module disable 2nginx -y
 Validate $? Disabling module
-echo "Continued eventhpugh failure occurs"
+#echo "Continued eventhough failure occurs solun give exit status after failure"
+
 # if [ $? eq 0 ]
 # then
 #     echo "disabling module is Success"
@@ -38,11 +39,26 @@ echo "Continued eventhpugh failure occurs"
 # else
 #     echo "disabling module is a failure"
 # fi
+ 
 
+dnf module enable nginx:1.24 -y 
+Validate $? Enabling module
 
-# dnf module enable nginx:1.24 -y 
+dnf install nginx -y 
+Validate $? Installing module
 
+rm -rf /usr/share/nginx/html/* 
+Validate $? Removing default content
 
-# dnf install nginx -y 
+curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
+Validate $? Downloading fontend content
 
+cd /usr/share/nginx/html 
+unzip /tmp/frontend.zip
+Validate $? Extracting the content
 
+#vim /etc/nginx/nginx.conf
+#create a file and copy the content
+
+systemctl restart nginx 
+Validate $? Restaring nginx
