@@ -29,7 +29,7 @@ fi
 Validate (){
     if [ $1 -eq 0 ]
     then
-        echo -e "$2 $R....Success$N"  | tee -a $Log_file
+        echo -e "$2 $G....Success$N"  | tee -a $Log_file
 
     else
         echo -e "$2 $R....Failure$N"  | tee -a $Log_file
