@@ -3,6 +3,7 @@ User_id=$(id -u)
 R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
+N="\e[34m"
 
 
 echo "Script stared at : $(date)"
@@ -22,10 +23,10 @@ fi
 Validate (){
     if [ $1 -eq 0 ]
     then
-        echo -e "$2 $R....Success"
+        echo -e "$2 $R....Success$N"
 
     else
-        echo -e "$2 $R....Failure"
+        echo -e "$2 $R....Failure$N"
         exit 1
     fi
 }
@@ -68,4 +69,4 @@ Validate $? "Extracting the content"
 systemctl restart nginx 
 Validate $? "Restaring nginx"
 
-echo -e "{$R}Everything{$G} is {$Y}perfect"
+echo -e "$R Everything$N $G is$N $Y perfect$N"
