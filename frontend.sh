@@ -22,6 +22,7 @@ Validate (){
 
     else
         echo "$2 ....Failure"
+        exit 1
     fi
 }
 
@@ -29,7 +30,7 @@ Validate (){
 
 dnf module disable 2nginx -y
 Validate $? Disabling module
-echo "contine just checking"
+echo "Continued eventhpugh failure occurs"
 # if [ $? eq 0 ]
 # then
 #     echo "disabling module is Success"
