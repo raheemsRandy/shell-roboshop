@@ -5,7 +5,7 @@ echo "Script stared at : $(date)"
 
 #Checking root access ,user_id of root is zero
 
-if [ $User_id eq 0 ]
+if [ $User_id -eq 0 ]
 then
     echo "you are having root access you can go on"
     
