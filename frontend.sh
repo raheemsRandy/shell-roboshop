@@ -15,7 +15,7 @@ else
 fi
 
 Validate (){
-    if [ $? eq 0 ]
+    if [ $? -eq 0 ]
     then
         echo "disabling module is Success"
 
