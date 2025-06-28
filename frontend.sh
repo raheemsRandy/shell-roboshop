@@ -21,6 +21,7 @@ Validate (){
 
     else
         echo "disabling module is a failure"
+    fi
 }
 
 #nginx installation
