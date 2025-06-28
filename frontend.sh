@@ -43,23 +43,23 @@ Validate $? Disabling module
  
 
 dnf module enable nginx:1.24 -y 
-Validate $? Enabling module
+Validate $? "Enabling module"
 
 dnf install nginx -y 
-Validate $? Installing module
+Validate $? "Installing module"
 
 rm -rf /usr/share/nginx/html/* 
-Validate $? Removing default content
+Validate $? "Removing default content"
 
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
-Validate $? Downloading fontend content
+Validate $? "Downloading fontend content"
 
 cd /usr/share/nginx/html 
 unzip /tmp/frontend.zip
-Validate $? Extracting the content
+Validate $? "Extracting the content"
 
 #vim /etc/nginx/nginx.conf
 #create a file and copy the content
 
 systemctl restart nginx 
-Validate $? Restaring nginx
+Validate $? "Restaring nginx"
