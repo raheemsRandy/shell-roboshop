@@ -29,6 +29,7 @@ Validate (){
 
 dnf module disable 2nginx -y
 Validate $? Disabling module
+echo "contine just checking"
 # if [ $? eq 0 ]
 # then
 #     echo "disabling module is Success"
