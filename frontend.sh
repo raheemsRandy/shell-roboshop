@@ -1,6 +1,8 @@
 #!/bin/bash
 User_id=$(id -u)
 R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
 
 
 echo "Script stared at : $(date)"
@@ -20,7 +22,7 @@ fi
 Validate (){
     if [ $1 -eq 0 ]
     then
-        echo  "$2 ....Success"
+        echo -e "$2 $R....Success"
 
     else
         echo -e "$2 $R....Failure"
@@ -30,8 +32,8 @@ Validate (){
 
 #nginx installation
 
-#dnf module disable nginx -y
-dnf module disable Errornginx -y checking whether it hrows error or not
+dnf module disable nginx -y
+# dnf module disable Errornginx -y checking whether it hrows error or not
 Validate $? Disabling module
 #echo "Continued eventhough failure occurs solun give exit status after failure"
 
@@ -65,3 +67,5 @@ Validate $? "Extracting the content"
 
 systemctl restart nginx 
 Validate $? "Restaring nginx"
+
+echo -e "{$R}Everything{$G} is {$Y}perfect"
