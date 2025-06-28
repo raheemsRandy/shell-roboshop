@@ -9,7 +9,8 @@ N="\e[0m"
 Logs_folder="/var/log/shellscript-logs"
 Script_name=$(echo $0 | cut -d "." -f1) 
 Log_file="$Logs_folder/$Script_name.log"
-Packages=("mysql" "python3" "nginx")
+#Packages=("mysql" "python3" "nginx")
+Packages=$@
 
 mkdir -p $Logs_folder
 echo "Script started at: $(date)"  | tee -a $Log_file
@@ -40,17 +41,19 @@ Validate(){
 cp mongo.repo /etc/yum.repos.d/mongo.repo
 Validate $? "Copying mongodb repo"
 
-dnf install mongodb-org -y 
+dnf install mongodb-org -y &>>Log_file
 Validate $? "Insatlling mongodb"
 
-systemctl enable mongod 
+systemctl enable mongod &>>Log_file
 Validate $? "Enabling mongodb"
 
-systemctl start mongod
+systemctl start mongod &>>Log_file
 Validate $? "Starting mongodb"
 
 sed -i "s/127.0.0.1/0.0.0.0/g" /etc/mongod.conf
 Validate $? "Edit the mongodb config file for remote connections"
 
-systemctl restart mongod
+systemctl restart mongod &>>Log_file
 Validate $? "Restart the mongodb"
+
+

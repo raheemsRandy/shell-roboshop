@@ -5,7 +5,8 @@ Instances=("mongodb" "catalogue" "redis" "mysql" "user" "cart" "shipping" "payme
 Zone_id=Z03949492VIIV3UN1MEFO
 Domain_name=raheemweb.fun
 
-for i in ${Instances[@]}
+#for i in ${Instances[@]}
+for i in $*
 do
     #if [ ]
     Instance_id=$(aws ec2 run-instances \
