@@ -73,7 +73,7 @@ Validate $? "Extracting the content"
 #create a file and copy the content
 
 rm -rf /etc/nginx/nginx.conf &>>$Log_file
-cp $Script_dir/nginx.conf/etc/nginx/nginx.conf
+cp $Script_dir/nginx.conf /etc/nginx/nginx.conf
 Validate $? copying nginx.conf
 
 systemctl restart nginx 
