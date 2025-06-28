@@ -30,8 +30,8 @@ Validate (){
 
 #nginx installation
 
-dnf module disable nginx -y
-#dnf module disable Errornginx -y checking whether it hrows error or not
+#dnf module disable nginx -y
+dnf module disable Errornginx -y checking whether it hrows error or not
 Validate $? Disabling module
 #echo "Continued eventhough failure occurs solun give exit status after failure"
 
