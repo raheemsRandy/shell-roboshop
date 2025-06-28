@@ -14,20 +14,21 @@ else
     exit 1;
 fi
 
+# we can pass values $1 and $2 for the validate
 Validate (){
-    if [ $? -eq 0 ]
+    if [ $1 -eq 0 ]
     then
-        echo "disabling module is Success"
+        echo "$2 ....Success"
 
     else
-        echo "disabling module is a failure"
+        echo "$2 ....Failure"
     fi
 }
 
 #nginx installation
 
 dnf module disable nginx -y
-Validate
+Validate $? Disabling module
 # if [ $? eq 0 ]
 # then
 #     echo "disabling module is Success"
