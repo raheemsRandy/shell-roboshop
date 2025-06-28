@@ -1,5 +1,7 @@
 #!/bin/bash
 User_id=$(id -u)
+R="\e[31m"
+
 
 echo "Script stared at : $(date)"
 
@@ -18,10 +20,10 @@ fi
 Validate (){
     if [ $1 -eq 0 ]
     then
-        echo "$2 ....Success"
+        echo  "$2 ....Success"
 
     else
-        echo "$2 ....Failure"
+        echo "$2 $R....Failure"
         exit 1
     fi
 }
@@ -43,10 +45,10 @@ Validate $? Disabling module
  
 
 dnf module enable nginx:1.24 -y 
-Validate $? "Enabling module"
+Validate $? "Enabling nginx module"
 
 dnf install nginx -y 
-Validate $? "Installing module"
+Validate $? "Installing nginx module"
 
 rm -rf /usr/share/nginx/html/* 
 Validate $? "Removing default content"
