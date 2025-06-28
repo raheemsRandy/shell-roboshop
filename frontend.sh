@@ -1,5 +1,5 @@
 #!/bin/bash
-User_id = $(id -u)
+User_id=$(id -u)
 
 echo "Script stared at : $(date)"
 
