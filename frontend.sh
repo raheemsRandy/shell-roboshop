@@ -1,11 +1,11 @@
 #!/bin/bash
-
+User_id = $(id -u)
 
 echo "Script stared at : $(date)"
 
 #Checking root access ,user_id of root is zero
 
-if [ User_id eq 0 ]
+if [ $User_id eq 0 ]
 then
     echo "you are having root access you can go on"
     
@@ -14,11 +14,18 @@ else
     exit 1;
 fi
 
-Validate
+Validate (){
+    if [ $? eq 0 ]
+    then
+        echo "disabling module is Success"
+
+    else
+        echo "disabling module is a failure"
+}
 
 #nginx installation
 
-dnf module disable nginx -y
+# dnf module disable nginx -y
 # if [ $? eq 0 ]
 # then
 #     echo "disabling module is Success"
@@ -27,9 +34,9 @@ dnf module disable nginx -y
 #     echo "disabling module is a failure"
 
 
-dnf module enable nginx:1.24 -y 
+# dnf module enable nginx:1.24 -y 
 
 
-dnf install nginx -y 
+# dnf install nginx -y 
 
 
