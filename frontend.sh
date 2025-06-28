@@ -14,25 +14,25 @@ else
     exit 1;
 fi
 
-Validate (){
-    if [ $? eq 0 ]
-    then
-        echo "disabling module is Success"
+# Validate (){
+#     if [ $? eq 0 ]
+#     then
+#         echo "disabling module is Success"
 
-    else
-        echo "disabling module is a failure"
-    fi
-}
+#     else
+#         echo "disabling module is a failure"
+#     fi
+# }
 
 #nginx installation
 
-# dnf module disable nginx -y
-# if [ $? eq 0 ]
-# then
-#     echo "disabling module is Success"
+dnf module disable nginx -y
+if [ $? eq 0 ]
+then
+    echo "disabling module is Success"
 
-# else
-#     echo "disabling module is a failure"
+else
+    echo "disabling module is a failure"
 
 
 # dnf module enable nginx:1.24 -y 
