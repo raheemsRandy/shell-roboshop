@@ -3,7 +3,7 @@
 User_id=$(id -u)
 $Script_dir = $PWD
 #checking root access
-if [ User_id -eq 0 ]
+if [ $User_id -eq 0 ]
 then
     echo "You are having root access you can go on"
 else
