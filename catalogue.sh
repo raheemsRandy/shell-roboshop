@@ -70,7 +70,7 @@ systemctl start catalogue
 Validate $? "Enabling and starting catalogue "
 
 #vim /etc/yum.repos.d/mongo.repo
-cp $Script_dir/mongo.rep /etc/yum.repos.d/mongo.repo
+cp $Script_dir/mongo.repo /etc/yum.repos.d/mongo.repo
 Validate $? "Copying the mongosh repo content"
 
 dnf install mongodb-mongosh -y
