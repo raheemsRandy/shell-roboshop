@@ -1,25 +1,40 @@
 #!/bin/bash
 
-User_id=$(id -u)
-Script_dir=$PWD
-#checking root access
-if [ $User_id -eq 0 ]
-then
-    echo "You are having root access you can go on"
+userId=$(id -u)
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
+
+Logs_folder="/var/log/shellscript-logs"
+Script_name=$(echo $0 | cut -d "." -f1) 
+Log_file="$Logs_folder/$Script_name.log"
+
+mkdir -p $Logs_folder
+echo "Script started at: $(date)"  | tee -a $Log_file
+
+if [ $userId -ne 0 ]
+then 
+    echo -e "$R please run this command with root access $N" | tee -a $Log_file
+    exit 1
 else
-    echo "You dont have root access"
+    echo -e "$G Your are running with root access $N"  | tee -a $Log_file
 fi
 
-#Takes argument $1=exit status and $2=process done
+#-----------------------------------------
+
 Validate(){
     if [ $1 -eq 0 ]
-    then
-        echo "$2 ...is Success"
-    else
-        echo "$2 ...is Failure"
+     then 
+        echo -e "$2 .....$G Success $N"  | tee -a $Log_file
+     else
+        echo -e " $2 .....$R Failure $N"| tee -a $Log_file
+        exit 1
     fi
-
 }
+
+
+
 #Installation of catalogue
 dnf module disable nodejs -y
 Validate $? "Disabling module"
@@ -75,7 +90,6 @@ Validate $? "Copying the mongosh repo content"
 
 dnf install mongodb-mongosh -y
 Validate $? "Installing mongosh client"
-
 
 Status=$(mongosh --host mongodb.raheemweb.fun --eval 'db.getMongo().getDbNames().indexOf("catalogue")')
 if [ $Status -gt 0 ]

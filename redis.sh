@@ -9,8 +9,6 @@ N="\e[0m"
 Logs_folder="/var/log/shellscript-logs"
 Script_name=$(echo $0 | cut -d "." -f1) 
 Log_file="$Logs_folder/$Script_name.log"
-#Packages=("mysql" "python3" "nginx")
-# Packages=$@
 
 mkdir -p $Logs_folder
 echo "Script started at: $(date)"  | tee -a $Log_file
@@ -36,22 +34,19 @@ Validate(){
 }
 
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo
-Validate $? "Copying mongodb repo"
+dnf module disable redis -y &>>Log_file
+Validate $? "Disabling redis"
 
-dnf install mongodb-org -y &>>Log_file
-Validate $? "Insatlling mongodb"
+dnf module enable redis:7 -y &>>Log_file
+Validate $? "Enabling redis"
 
-systemctl enable mongod &>>Log_file
-Validate $? "Enabling mongodb"
+dnf install redis -y &>>Log_file
+Validate $? "Installing redis"
 
-systemctl start mongod &>>Log_file
-Validate $? "Starting mongodb"
+sed -i "s/127.0.0.1/0.0.0.0/g" /etc/redis/redis.conf &>>Log_file
+Validate $? "Remote connection"
 
-sed -i "s/127.0.0.1/0.0.0.0/g" /etc/mongod.conf
-Validate $? "Edit the mongodb config file for remote connections"
-
-systemctl restart mongod &>>Log_file
-Validate $? "Restart the mongodb"
-
+systemctl enable redis &>>Log_file
+systemctl start redis &>>Log_file
+Validate $? "Enabling and starting redis"
 
