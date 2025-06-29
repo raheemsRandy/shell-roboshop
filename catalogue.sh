@@ -30,17 +30,17 @@ Validate $? "Enabling module"
 dnf install nodejs -y
 Validate $? "Installing nodejs"
 
-# id roboshop
-# if [ $? -ne 0]
-# then
-#     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
-#     Validate $? "Adding system user"
-# else
-#     echo "System user roboshop already exists"
-# fi
+id roboshop
+if [ $? -ne 0]
+then
+    useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
+    Validate $? "Adding system user"
+else
+    echo "System user roboshop already exists"
+fi
 
-useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
-Validate $? "Adding system user"
+# useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
+# Validate $? "Adding system user"
 
 mkdir -p /app 
 Validate $? "Creating directory"
@@ -48,8 +48,8 @@ Validate $? "Creating directory"
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
 Validate $? "Downloading Catalogue content"
 
-# rm -rf /app/*
-# Validate $? "Removing everything in app folder"
+rm -rf /app/*
+Validate $? "Removing everything in app folder"
 
 cd /app 
 unzip /tmp/catalogue.zip
@@ -76,8 +76,17 @@ Validate $? "Copying the mongosh repo content"
 dnf install mongodb-mongosh -y
 Validate $? "Installing mongosh client"
 
-mongosh --host mongodb.raheemweb.fun </app/db/master-data.js
-Validate $? "Loading the master data"
+
+Status=$(mongosh --host mongodb.raheemweb.fun --eval 'db.getMongo().getDbNames().indexOf("catalogue)')
+if [ $Status -gt 0]
+then 
+    echo "data is already loaded"
+else
+    mongosh --host mongodb.raheemweb.fun </app/db/master-data.js
+    Validate $? "Loading the master data"
+
+
+
 
 # mongosh --host mongodb.raheemweb.fun
 # Validate $? "Checking connection to client mongoosh"
