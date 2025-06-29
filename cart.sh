@@ -35,13 +35,13 @@ Validate(){
 }
 #&>>Log_file
 
-dnf module disable nodejs -y
+dnf module disable nodejs -y&>>Log_file
 Validate $? "disable nodejs"
 
-dnf module enable nodejs:20 -y
+dnf module enable nodejs:20 -y&>>Log_file
 Validate $? "enable nodejs"
 
-dnf install nodejs -y
+dnf install nodejs -y&>>Log_file
 Validate $? "disable nodejs"
 
 id roboshop
@@ -56,22 +56,22 @@ fi
 
 mkdir -p /app 
 
-curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip
+curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip&>>Log_file
 Validate $? "downloading cart"
 
 cd /app 
-unzip /tmp/cart.zip
+unzip /tmp/cart.zip&>>Log_file
 Validate $? "extract cart app"
 
-cd /app 
-npm install 
+cd /app &>>Log_file
+npm install &>>Log_file
 Validate $? "install npm"
 
 #vim /etc/systemd/system/cart.service
-cp  $Script_dir/cart.service /etc/systemd/system/cart.service
+cp  $Script_dir/cart.service /etc/systemd/system/cart.service&>>Log_file
 Validate $? "copying service file"
 
 systemctl daemon-reload
 systemctl enable cart 
 systemctl start cart
-Validate $? "disable nodejs"
+Validate $? "enable and start cart"
