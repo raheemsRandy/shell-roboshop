@@ -78,7 +78,7 @@ Validate $? "Installing mongosh client"
 
 
 Status=$(mongosh --host mongodb.raheemweb.fun --eval 'db.getMongo().getDbNames().indexOf("catalogue")')
-if [ $Status -gt 0]
+if [ $Status -gt 0 ]
 then 
     echo "data is already loaded"
 else
