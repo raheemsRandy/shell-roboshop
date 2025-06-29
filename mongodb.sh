@@ -7,7 +7,8 @@ Y="\e[33m"
 N="\e[0m"
 
 Logs_folder="/var/log/shellscript-logs"
-Script_name=$(echo $0 | cut -d "." -f1) 
+#Script_name=$(echo $0 | cut -d "." -f1) 
+Script_name=$(echo $0)
 Log_file="$Logs_folder/$Script_name.log"
 #Packages=("mysql" "python3" "nginx")
 # Packages=$@
