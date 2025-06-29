@@ -31,7 +31,7 @@ dnf install nodejs -y
 Validate $? "Installing nodejs"
 
 id roboshop
-if [ $? -ne 0]
+if [ $? -ne 0 ]
 then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
     Validate $? "Adding system user"
@@ -84,6 +84,7 @@ then
 else
     mongosh --host mongodb.raheemweb.fun </app/db/master-data.js
     Validate $? "Loading the master data"
+fi
 
 
 
