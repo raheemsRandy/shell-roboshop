@@ -81,9 +81,15 @@ Validate $? "Enable and start shipping"
 dnf install mysql -y &>>Log_file
 Validate $? "installing mysql"
 
-mysql -h mysql.raheemweb.fun -uroot -p$Mysql_root_pass < /app/db/schema.sql&>>Log_file
-mysql -h mysql.raheemweb.fun -uroot -p$Mysql_root_pass < /app/db/app-user.sql &>>Log_file
-mysql -h mysql.raheemweb.fun -uroot -p$Mysql_root_pass < /app/db/master-data.sql&>>Log_file
+mysql -h mysql.raheemweb.fun -u root -pRoboShop@1 -e 'use cities'
+if[ $? -ne 0 ]
+then
+    mysql -h mysql.raheemweb.fun -uroot -p$Mysql_root_pass < /app/db/schema.sql&>>Log_file
+    mysql -h mysql.raheemweb.fun -uroot -p$Mysql_root_pass < /app/db/app-user.sql &>>Log_file
+    mysql -h mysql.raheemweb.fun -uroot -p$Mysql_root_pass < /app/db/master-data.sql&>>Log_file
+else    
+    echo "Data is already loaded"
+fi
 
 
 systemctl restart shipping&>>Log_file

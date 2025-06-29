@@ -33,6 +33,10 @@ Validate(){
     fi
 }
 
+#vim /etc/yum.repos.d/rabbitmq.repo
+cp $Script_dir/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
+Validate $? "copying repo"
+
 dnf install rabbitmq-server -y&>>Log_file
 Validate $? "installing rabbitmq"
 
