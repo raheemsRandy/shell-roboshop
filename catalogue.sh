@@ -90,7 +90,7 @@ Validate $? "Copying the mongosh repo content"
 dnf install mongodb-mongosh -y&>>Log_file
 Validate $? "Installing mongosh client"
 
-Status=$(mongosh --host mongodb.raheemweb.fun --eval 'db.getMongo().getDbNames().indexOf("catalogue")')
+Status=$(mongosh --host mongodb.raheemweb.fun --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
 
 if [ $Status -ge 0 ]
 then 
