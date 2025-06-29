@@ -10,6 +10,7 @@ Logs_folder="/var/log/shellscript-logs"
 #Script_name=$(echo $0 | cut -d "." -f1) 
 Script_name=$(echo $0)
 Log_file="$Logs_folder/$Script_name.log"
+Script_dir=$PWD
 #Packages=("mysql" "python3" "nginx")
 # Packages=$@
 
@@ -37,11 +38,11 @@ Validate(){
 }
 
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo
+cp $Script_dir/mongo.repo /etc/yum.repos.d/mongo.repo
 Validate $? "Copying mongodb repo"
 
 dnf install mongodb-org -y &>>Log_file
-Validate $? "Insatlling mongodb"
+Validate $? "Installing mongodb"
 
 systemctl enable mongod &>>Log_file
 Validate $? "Enabling mongodb"
