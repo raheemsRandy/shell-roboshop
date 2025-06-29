@@ -69,6 +69,6 @@ Validate $? "installing pip"
 cp $Script_dir/user.service /etc/systemd/system/user.service&>>Log_file
 Validate $? "copying service file"
 
-systemctl enable payment &>>Log_file
-systemctl start payment&>>Log_file
+systemctl enable payment 
+systemctl start payment
 Validate $? "Enable and start payment"
