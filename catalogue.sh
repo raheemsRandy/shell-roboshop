@@ -1,7 +1,7 @@
 #!/bin/bash
 
 User_id=$(id -u)
-$Script_dir=$PWD
+Script_dir=$PWD
 #checking root access
 if [ $User_id -eq 0 ]
 then
