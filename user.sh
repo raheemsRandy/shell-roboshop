@@ -9,6 +9,7 @@ N="\e[0m"
 Logs_folder="/var/log/shellscript-logs"
 Script_name=$(echo $0)
 Log_file="$Logs_folder/$Script_name.log"
+Script_dir=$PWD
 
 mkdir -p $Logs_folder
 echo "Script started at: $(date)"  | tee -a $Log_file
@@ -42,7 +43,7 @@ dnf module enable nodejs:20 -y
 dnf install nodejs -y
 
 id roboshop
-if [$? -eq 0]
+if [ $? -eq 0 ]
 then    
     echo "user already exists"
 else
