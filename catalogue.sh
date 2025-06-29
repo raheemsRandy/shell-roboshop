@@ -56,6 +56,9 @@ cd /app
 npm install 
 Validate $? "Installing npm"
 
+cp $Script_dir/catalogue.service /etc/systemd/system/catalogue.service
+Validate $? "Copying catalogue service"
+
 systemctl daemon-reload
 Validate $? "Daemon reload"
 
@@ -73,8 +76,8 @@ Validate $? "Installing mongosh client"
 mongosh --host mongodb.raheemweb.fun </app/db/master-data.js
 Validate $? "Loading the master data"
 
-mongosh --host mongodb.raheemweb.fun
-Validate $? "Checking connection to client mongoosh"
+# mongosh --host mongodb.raheemweb.fun
+# Validate $? "Checking connection to client mongoosh"
 
 
 
