@@ -66,7 +66,7 @@ pip3 install -r requirements.txt&>>Log_file
 Validate $? "installing pip"
 
 #vim /etc/systemd/system/payment.service
-cp $Script_dir/user.service /etc/systemd/system/user.service&>>Log_file
+cp $Script_dir/payment.service /etc/systemd/system/payment.service&>>Log_file
 Validate $? "copying service file"
 
 systemctl enable payment 
