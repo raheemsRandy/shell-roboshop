@@ -39,14 +39,17 @@ Validate $? "Installing nodejs"
 #     echo "System user roboshop already exists"
 # fi
 
- useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
+useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
 Validate $? "Adding system user"
 
-mkdir /app 
+mkdir -p /app 
 Validate $? "Creating directory"
 
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip"
-Validate "$? "Downloading Catalogue content"
+curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
+Validate $? "Downloading Catalogue content"
+
+# rm -rf /app/*
+# Validate $? "Removing everything in app folder"
 
 cd /app 
 unzip /tmp/catalogue.zip
