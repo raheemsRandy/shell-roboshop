@@ -71,7 +71,8 @@ cd /app
 npm install &>>Log_file
 Validate $? "Installing npm"
 
-cp $Script_dir/catalogue.service /etc/systemd/system/catalogue.service&>>Log_file
+#vim /etc/systemd/system/catalogue.service
+cp $Script_dir/catalogue.service /etc/systemd/system/catalogue.service
 Validate $? "Copying catalogue service"
 
 systemctl daemon-reload&>>Log_file
