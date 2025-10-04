@@ -1,41 +1,9 @@
-#!/bin/bash
-User_id=$(id -u)
-R="\e[31m"
-G="\e[32m"
-Y="\e[33m"
-N="\e[34m"
+source ./common.sh
+App_name=
 
-Logs_folder="/var/logs/shellscript-logs"
-Script_name=$(echo $0)
-Log_file=$Log_folder/$Script_name.log
-Script_dir=$PWD
+check_root
 
 
-
-echo "Script stared at : $(date)" | tee -a $Log_file
-
-#Checking root access ,user_id of root is zero
-
-if [ $User_id -eq 0 ]
-then
-    echo "you are having root access you can go on"  | tee -a $Log_file
-    
-else
-    echo "you dont have root access"  | tee -a $Log_file
-    exit 1;
-fi
-
-# we can pass values $1 and $2 for the validate
-Validate (){
-    if [ $1 -eq 0 ]
-    then
-        echo -e "$2 $G....Success$N"  | tee -a $Log_file
-
-    else
-        echo -e "$2 $R....Failure$N"  | tee -a $Log_file
-        exit 1
-    fi
-}
 
 #nginx installation
 
@@ -78,5 +46,7 @@ Validate $? copying nginx.conf
 
 systemctl restart nginx 
 Validate $? "Restaring nginx"
+
+print_time
 
 echo -e "$R Everything$N $G is$N $Y perfect$N"
